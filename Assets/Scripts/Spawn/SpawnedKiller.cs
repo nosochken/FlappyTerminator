@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
@@ -11,7 +9,7 @@ public abstract class SpawnedKiller : MonoBehaviour, ISpawnable<SpawnedKiller>
 	public event Action<SpawnedKiller> ReadiedForRelease;
 	public event Action KilledTarget;
 
-    private void Awake()
+    protected virtual void Awake()
 	{		
 		_collisionDetector = GetComponent<CollisionDetector>();
 	}
@@ -26,7 +24,7 @@ public abstract class SpawnedKiller : MonoBehaviour, ISpawnable<SpawnedKiller>
 		_collisionDetector.CollisionDetected -= ReactToCollision;
 	}
 	
-	protected abstract bool GetAchieveTarget(Collision2D collision);
+	protected virtual bool GetAchieveTarget(Collision2D collision) => true;
 	
 	private void ReactToCollision(Collision2D collision)
 	{

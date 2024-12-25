@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : Spawner<Enemy>
@@ -20,15 +19,15 @@ public class EnemySpawner : Spawner<Enemy>
 	{
 		StartCoroutine(SpawnWithDelay());
 	}
-	
+
 	protected override void ActOnGet(Enemy spawnableObject)
 	{
-		SetSpawnPosition(spawnableObject);
+	   	SetSpawnPosition(spawnableObject);
 		transform.rotation = _spawnZone.transform.rotation;
 		
 		base.ActOnGet(spawnableObject);
 	}
-	
+
 	protected override void CustomizeObject(Enemy spawnableObject)
 	{
 		base.CustomizeObject(spawnableObject);
@@ -37,13 +36,13 @@ public class EnemySpawner : Spawner<Enemy>
 			bulletSpawner.ObjectKilledTarget += InvokeObjectKilledTarget;
 	}
 
-	protected override void ActOnDestroy(Enemy spawnableObject)
-	{
-		if (spawnableObject.gameObject.TryGetComponent(out EnemyBulletSpawner bulletSpawner))
+    protected override void ActOnDestroy(Enemy spawnableObject)
+    {
+        if (spawnableObject.gameObject.TryGetComponent(out EnemyBulletSpawner bulletSpawner))
 			bulletSpawner.ObjectKilledTarget -= InvokeObjectKilledTarget;
 			
 		base.ActOnDestroy(spawnableObject);
-	}
+    }
 	
 	private IEnumerator SpawnWithDelay()
 	{
@@ -54,7 +53,7 @@ public class EnemySpawner : Spawner<Enemy>
 		}
 	}
 	
-	private void SetSpawnPosition(Enemy spawnableObject)
+	private void SetSpawnPosition(SpawnedKiller spawnableObject)
 	{
 		float spawnPositionY = 0f;
 		

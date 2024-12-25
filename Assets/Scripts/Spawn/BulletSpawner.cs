@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BulletSpawner<T> : Spawner<Bullet> where T: MonoBehaviour, ISpawnable<Bullet>
+public abstract class BulletSpawner<T> : Spawner<Bullet>
 {
 	 [SerializeField] private Weapon _gun;
 	
@@ -15,7 +15,7 @@ public abstract class BulletSpawner<T> : Spawner<Bullet> where T: MonoBehaviour,
 	{
 		_gun.Shooting -= Spawn;
 	}
-	
+
 	protected override void ActOnGet(Bullet spawnableObject)
 	{
 		spawnableObject.gameObject.transform.position = _gun.transform.position;
@@ -25,5 +25,4 @@ public abstract class BulletSpawner<T> : Spawner<Bullet> where T: MonoBehaviour,
 		
 		spawnableObject.Fly();
 	}
-	
 }

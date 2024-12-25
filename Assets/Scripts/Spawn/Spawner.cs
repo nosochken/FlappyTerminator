@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class Spawner<T> : MonoBehaviour where T : MonoBehaviour, ISpawnable<T>
+public class Spawner<T> : MonoBehaviour where T : SpawnedKiller
 {
 	[SerializeField] private T _prefab;
 	
@@ -47,17 +47,17 @@ public class Spawner<T> : MonoBehaviour where T : MonoBehaviour, ISpawnable<T>
 		_pool.Get();
 	}
 	
-	private void ReturnToPool(T spawnableObject)
-	{
-		_pool.Release(spawnableObject);
-	}
-	
 	protected virtual void ActOnDestroy(T spawnableObject)
 	{
 		spawnableObject.ReadiedForRelease -= ReturnToPool;
 		spawnableObject.KilledTarget -= InvokeObjectKilledTarget;
 		
 		Destroy(spawnableObject.gameObject);
+	}
+	
+	private void ReturnToPool(T spawnableObject)
+	{
+		_pool.Release(spawnableObject);
 	}
 	
 	protected virtual void CustomizeObject(T spawnableObject) { }
