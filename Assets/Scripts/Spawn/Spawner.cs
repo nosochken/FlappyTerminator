@@ -1,17 +1,19 @@
+using System;
 using UnityEngine;
 using UnityEngine.Pool;
 
 public class Spawner<T> : MonoBehaviour where T : MonoBehaviour, ISpawnable<T>
 {
 	[SerializeField] private T _prefab;
-	[SerializeField] private Transform _container;
 	
 	[SerializeField, Min(1)] private int _poolCapacity = 5;
 	[SerializeField, Min(1)] private int _poolMaxSize = 5;
 	
+	public event Action ObjectKilledTarget;
+	
 	private ObjectPool<T> _pool;
 
-	private void Awake()
+	protected virtual void Awake()
 	{
 		_pool = new ObjectPool<T>(
 		createFunc: () => Create(),
@@ -26,14 +28,17 @@ public class Spawner<T> : MonoBehaviour where T : MonoBehaviour, ISpawnable<T>
 	private T Create()
 	{
 		T spawnableObject = Instantiate(_prefab);
+		
 		spawnableObject.ReadiedForRelease += ReturnToPool;
+		spawnableObject.KilledTarget += InvokeObjectKilledTarget;
+		
+		CustomizeObject(spawnableObject);
 
 		return spawnableObject;
 	}
 	
 	protected virtual void ActOnGet(T spawnableObject)
 	{
-		spawnableObject.gameObject.transform.position = _container.transform.position;
 		spawnableObject.gameObject.SetActive(true);
 	}
 	
@@ -47,9 +52,18 @@ public class Spawner<T> : MonoBehaviour where T : MonoBehaviour, ISpawnable<T>
 		_pool.Release(spawnableObject);
 	}
 	
-	private void ActOnDestroy(T spawnableObject)
+	protected virtual void ActOnDestroy(T spawnableObject)
 	{
 		spawnableObject.ReadiedForRelease -= ReturnToPool;
+		spawnableObject.KilledTarget -= InvokeObjectKilledTarget;
+		
 		Destroy(spawnableObject.gameObject);
+	}
+	
+	protected virtual void CustomizeObject(T spawnableObject) { }
+	
+	protected void InvokeObjectKilledTarget()
+	{
+		ObjectKilledTarget?.Invoke();
 	}
 }

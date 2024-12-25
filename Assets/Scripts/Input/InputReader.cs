@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class InputReader : MonoBehaviour
@@ -6,8 +5,8 @@ public class InputReader : MonoBehaviour
 	[SerializeField] private KeyCode _movementKey = KeyCode.Space;
 	[SerializeField] private KeyCode _shootKey = KeyCode.Mouse0;
 	
-	public event Action MovementKeyPressed;
-	public event Action ShootKeyPressed;
+	private bool _isMovementKeyPressed;
+	private bool _isShootKeyPressed;
 
 	private void Update()
 	{
@@ -15,15 +14,29 @@ public class InputReader : MonoBehaviour
 		ReadShootKey();
 	}
 	
+	public bool GetMovementKeyState() => GetKeyState(ref _isMovementKeyPressed);
+	public bool GetShootKeyState() => GetKeyState(ref _isShootKeyPressed);
+	
 	private void ReadMovementKey()
 	{
 		if (Input.GetKeyDown(_movementKey))
-			MovementKeyPressed?.Invoke();
+			_isMovementKeyPressed = true;
 	}
 	
 	private void ReadShootKey()
 	{
 		if (Input.GetKeyDown(_shootKey))
-			ShootKeyPressed?.Invoke();
+			_isShootKeyPressed = true;
+	}
+	
+	private bool GetKeyState(ref bool keyState)
+	{
+		if (keyState)
+		{
+			keyState = false;
+			return true;
+		}
+		
+		return false;
 	}
 }

@@ -1,8 +1,10 @@
-using System;
+using UnityEngine;
 
-public class PlayerBullet : Bullet//, ISpawnable<PlayerBullet>
+public class PlayerBullet : Bullet 
 {
-	//public new event Action<PlayerBullet> ReadiedForRelease;
-
+    protected override bool GetAchieveTarget(Collision2D collision)
+    {
+        return collision.gameObject.TryGetComponent<Enemy>(out _);
 	
+	}
 }

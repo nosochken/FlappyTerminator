@@ -1,36 +1,27 @@
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerMover), typeof(PlayerShooter))]
+[RequireComponent(typeof(PlayerMover))]
 public class Player : MonoBehaviour
 {
 	[SerializeField] private InputReader _inputReader;
 	
 	private PlayerMover _mover;
-	private PlayerShooter _shooter;
+	private Weapon _weapon;
 	
 	private void Awake()
 	{
 		_mover = GetComponent<PlayerMover>();
-		_shooter = GetComponentInChildren<PlayerShooter>();
+		_weapon = GetComponentInChildren<Weapon>();
 	}
 	
-	private void OnEnable()
-	{
-		_inputReader.MovementKeyPressed += Move;
-		_inputReader.ShootKeyPressed += Shoot;
-	}
-	
-	private void Update()
+	private void FixedUpdate()
 	{
 		_mover.ApplyGravityRotation();
+		
+		if (_inputReader.GetMovementKeyState())
+			_mover.Move();
+			
+		if (_inputReader.GetShootKeyState())
+			_weapon.Shoot();
 	}
-	
-	private void OnDisable()
-	{
-		_inputReader.MovementKeyPressed -= Move;
-		_inputReader.ShootKeyPressed -= Shoot;
-	}	
-	
-	private void Move() => _mover.Move();
-	private void Shoot() => _shooter.Shoot();
 }

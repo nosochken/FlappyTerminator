@@ -1,23 +1,18 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BulletView), typeof(Collider2D), typeof(Rigidbody2D))]
-[RequireComponent(typeof(CollisionDetector))]
-public abstract class Bullet : MonoBehaviour, ISpawnable<Bullet>
+[RequireComponent(typeof(Collider2D))]
+public abstract class SpawnedKiller : MonoBehaviour, ISpawnable<SpawnedKiller>
 {
-	[SerializeField] private float _speed = 5f;
-	
-	private Rigidbody2D _rigidbody;
 	private CollisionDetector _collisionDetector;
 	
-	public event Action<Bullet> ReadiedForRelease;
+	public event Action<SpawnedKiller> ReadiedForRelease;
 	public event Action KilledTarget;
-	
-	private void Awake()
+
+    private void Awake()
 	{		
-		_rigidbody = GetComponent<Rigidbody2D>();
-		_rigidbody.gravityScale = 0;
-		
 		_collisionDetector = GetComponent<CollisionDetector>();
 	}
 	
@@ -29,11 +24,6 @@ public abstract class Bullet : MonoBehaviour, ISpawnable<Bullet>
 	private void OnDisable()
 	{
 		_collisionDetector.CollisionDetected -= ReactToCollision;
-	}
-	
-	public void Fly()
-	{	
-		_rigidbody.velocity = transform.right * _speed;
 	}
 	
 	protected abstract bool GetAchieveTarget(Collision2D collision);

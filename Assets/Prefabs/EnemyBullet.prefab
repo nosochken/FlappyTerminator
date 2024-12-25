@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 6860208083929156694}
   - component: {fileID: 1806047569491153991}
   - component: {fileID: 8062806305607223499}
-  - component: {fileID: 5837152168806286579}
   - component: {fileID: 3991359058877294567}
   - component: {fileID: 3397942932886630189}
-  m_Layer: 0
+  - component: {fileID: 383109519572015031}
+  m_Layer: 10
   m_Name: EnemyBullet
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2800000, guid: 0df64f9d78b8541bd8b83e5bfa0c8251, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -101,18 +101,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletData: {fileID: 11400000, guid: f4317efb8cbee402aa93c789b894461c, type: 2}
---- !u!114 &5837152168806286579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5697651693204803647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ba077b9faa4c4b1faaf943a08b938fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &3991359058877294567
 Rigidbody2D:
   serializedVersion: 4
@@ -175,3 +163,16 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.15, y: 0.0001}
   m_Direction: 0
+--- !u!114 &383109519572015031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5697651693204803647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0beb0053d0b034050afe0ef4d8ef81ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 5
