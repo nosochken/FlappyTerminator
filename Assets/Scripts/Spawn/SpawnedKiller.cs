@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public abstract class SpawnedKiller : MonoBehaviour, ISpawnable<SpawnedKiller>
+public abstract class SpawnedKiller : MonoBehaviour
 {
 	private CollisionDetector _collisionDetector;
 	
