@@ -165,7 +165,7 @@ MonoBehaviour:
   _layerOfKillableTarget:
     serializedVersion: 2
     m_Bits: 64
-  _speed: 1.5
+  _speed: 2
   _delayInShooting: 0.5
 --- !u!70 &1877853730657158211
 CapsuleCollider2D:

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class CollisionDetector : MonoBehaviour
 {
     public event Action<Collision2D> CollisionDetected;

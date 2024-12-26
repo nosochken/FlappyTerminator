@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D), typeof(Rigidbody2D), typeof(CollisionDetector))]
+[RequireComponent(typeof(CollisionDetector))]
 public abstract class CollisionKiller : MonoBehaviour
 {
     [SerializeField] private LayerMask _layerOfKillableTarget;
