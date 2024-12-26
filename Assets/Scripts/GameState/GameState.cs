@@ -15,7 +15,7 @@ public class GameState : MonoBehaviour
         _gameResult.GameOver += FinishGame;
     }
 
-    private void Start()
+    private void Awake()
     {
         Time.timeScale = 0;
         _gameStartScreen.Open();
