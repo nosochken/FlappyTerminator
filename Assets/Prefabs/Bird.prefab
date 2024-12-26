@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5368121118458174137}
   - component: {fileID: 8272280496775595961}
-  - component: {fileID: 5050040484829249968}
+  - component: {fileID: 1951277340761895564}
   m_Layer: 7
   m_Name: Weapon
   m_TagString: Untagged
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4787627429362483770}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.07, y: 0, z: 0}
+  m_LocalPosition: {x: 0.08, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc5d84750fa2f46f79c414fefa604bf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5050040484829249968
+--- !u!114 &1951277340761895564
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -54,13 +54,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4787627429362483770}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fe30bdfa9a4c4560bf41c42ad718421, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b6035a5d90e44182a01ea586667cfc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 383109519572015031, guid: 27dfe44ccf3dc4f518277e2504969470, type: 3}
-  _poolCapacity: 5
-  _poolMaxSize: 5
-  _gun: {fileID: 8272280496775595961}
+  _prefab: {fileID: 9006455370724981627, guid: 27dfe44ccf3dc4f518277e2504969470, type: 3}
+  _poolCapacity: 10
+  _poolMaxSize: 10
+  _weapon: {fileID: 8272280496775595961}
 --- !u!1 &7335320832912614020
 GameObject:
   m_ObjectHideFlags: 0
@@ -73,6 +73,8 @@ GameObject:
   - component: {fileID: 1853371774993923390}
   - component: {fileID: 4620651324980941570}
   - component: {fileID: 1877853730657158211}
+  - component: {fileID: 7393478842645422837}
+  - component: {fileID: 5123061260176497522}
   m_Layer: 7
   m_Name: Bird
   m_TagString: Untagged
@@ -88,14 +90,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7335320832912614020}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.8811588, y: -0.049035035, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 0}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 7.0000005, y: 7.0000005, z: 0}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5368121118458174137}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!212 &1853371774993923390
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -160,6 +162,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 428ad244a639b41d9a923ad390dc5b6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _layerOfKillableTarget:
+    serializedVersion: 2
+    m_Bits: 64
+  _speed: 1.5
+  _delayInShooting: 0.5
 --- !u!70 &1877853730657158211
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -195,3 +202,42 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.16, y: 0.13}
   m_Direction: 0
+--- !u!114 &7393478842645422837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7335320832912614020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 606bc946614a847838ee1f866e4be89c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &5123061260176497522
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7335320832912614020}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
