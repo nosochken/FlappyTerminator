@@ -18,6 +18,10 @@ public class GameState : MonoBehaviour
     private void Awake()
     {
         Time.timeScale = 0;
+    }
+
+    private void Start()
+    {
         _gameStartScreen.Open();
     }
 
