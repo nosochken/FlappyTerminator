@@ -10,8 +10,11 @@ public class InputReader : MonoBehaviour
 
     private void Update()
     {
-        ReadMovementKey();
-        ReadShootKey();
+        if (Time.timeScale == 1)
+        {
+            ReadMovementKey();
+            ReadShootKey();
+        }
     }
 
     public bool GetMovementKeyState() => GetKeyState(ref _isMovementKeyPressed);

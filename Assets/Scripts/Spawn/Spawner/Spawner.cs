@@ -33,7 +33,6 @@ public class Spawner<T> : MonoBehaviour where T : SpawnableKillingFlyer<T>
             Release(activeObject);
 
         _activeObjects.Clear();
-        _pool.Clear();
     }
 
     protected virtual void Release(T spawnableObject)
@@ -54,8 +53,7 @@ public class Spawner<T> : MonoBehaviour where T : SpawnableKillingFlyer<T>
 
     protected void Spawn()
     {
-        T spawnableObject = _pool.Get();
-        _activeObjects.Add(spawnableObject);
+        _pool.Get();
     }
 
     protected void InvokeObjectKilledTarget()
@@ -79,13 +77,14 @@ public class Spawner<T> : MonoBehaviour where T : SpawnableKillingFlyer<T>
     {
         SetTransform(spawnableObject);
         spawnableObject.gameObject.SetActive(true);
+        _activeObjects.Add(spawnableObject);
 
         spawnableObject.Fly();
     }
 
     private void ReturnToPool(T spawnableObject)
     {
-        _activeObjects.Remove(spawnableObject);
         _pool.Release(spawnableObject);
+        _activeObjects.Remove(spawnableObject);
     }
 }

@@ -28,8 +28,9 @@ public class TrackingGameResult : MonoBehaviour
 
     private void InvokeGameOver()
     {
-        GameOver?.Invoke();
-        _playerBulletSpawner.ReturnAllToPool();
         _enemySpawner.ReturnAllToPool();
+        _playerBulletSpawner.ReturnAllToPool();
+
+        GameOver?.Invoke();
     }
 }
