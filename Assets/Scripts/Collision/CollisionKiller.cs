@@ -31,7 +31,7 @@ public abstract class CollisionKiller : MonoBehaviour
     {
         if ((_layerOfKillableTarget.value & (1 << collision.gameObject.layer)) != 0)
             KilledTarget?.Invoke();
-
-        PerformAdditionalCollisionAction();
+        else
+            PerformAdditionalCollisionAction();
     }
 }
